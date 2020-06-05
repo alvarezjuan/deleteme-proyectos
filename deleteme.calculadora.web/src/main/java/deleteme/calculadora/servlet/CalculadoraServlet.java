@@ -25,7 +25,7 @@ public class CalculadoraServlet extends HttpServlet {
 		try {
 
 			CalculadoraEngine engine = new CalculadoraEngine();
-			String resultado = engine.Calcular(primerOperando, operador, segundoOperando, calcular);
+			String resultado = engine.calcular(primerOperando, operador, segundoOperando, calcular);
 			renderHtml(res, resultado, "Por favor escriba los numeros, la operacion y pulse el boton de calcular");
 		}
 		catch (Exception ex) {
