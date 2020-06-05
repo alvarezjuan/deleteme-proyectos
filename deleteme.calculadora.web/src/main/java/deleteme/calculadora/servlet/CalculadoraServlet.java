@@ -5,6 +5,8 @@ import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
+import deleteme.calculadora.component.CalculadoraEngine;
+
 public class CalculadoraServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -14,7 +16,21 @@ public class CalculadoraServlet extends HttpServlet {
 	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		renderHtml(res, "0", "Por favor escriba los numeros, la operacion y pulse el boton de calcular");
+
+		String primerOperando = req.getParameter("primeroperando");
+		String operador = req.getParameter("operador");
+		String segundoOperando = req.getParameter("segundooperando");
+		String calcular = req.getParameter("calcular");
+
+		try {
+
+			CalculadoraEngine engine = new CalculadoraEngine();
+			String resultado = engine.Calcular(primerOperando, operador, segundoOperando, calcular);
+			renderHtml(res, resultado, "Por favor escriba los numeros, la operacion y pulse el boton de calcular");
+		}
+		catch (Exception ex) {
+			renderHtml(res, "N/A", ex.getMessage());
+		}
 	}
 
 	public void renderHtml(HttpServletResponse res, String resultado, String mensajes) throws ServletException, IOException {
